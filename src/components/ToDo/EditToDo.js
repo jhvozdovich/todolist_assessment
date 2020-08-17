@@ -25,7 +25,7 @@ function EditToDo({ selectedTask, onEditForm, onCancel }) {
       <form onSubmit={() => onEditForm(selectedTask, title, description)}>
         <TextField
           id="title"
-          label="New To Do"
+          label={selectedTask.title}
           variant="outlined"
           value={title}
           onChange={onTitleChange}
@@ -33,14 +33,14 @@ function EditToDo({ selectedTask, onEditForm, onCancel }) {
         <br />
         <TextField
           id="description"
-          label="Description"
+          label={selectedTask.description}
           variant="outlined"
           value={description}
           onChange={onDescriptionChange}
         />
         <br />
         <Button variant="contained" color="primary" type="submit">
-          Add Item
+          Edit Task
         </Button>
       </form>
     </div>

@@ -5,7 +5,7 @@ import "./ToDoList.css";
 function ListToDo({ todoList, onChangeSelectedTask }) {
   let ToDoList = todoList.map((item) => {
     return (
-      <li onClick={onChangeSelectedTask}>
+      <li onClick={() => onChangeSelectedTask(item)}>
         {item.title} - {item.description}
       </li>
     );

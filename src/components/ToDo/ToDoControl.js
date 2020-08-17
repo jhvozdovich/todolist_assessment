@@ -34,10 +34,11 @@ function ToDoControl({ firebase }) {
       description: description,
       id: id,
     };
-    firebase.firestore.update(
-      { collection: "ToDoList", doc: updateItem.id },
-      updateItem
-    );
+    // FIX SYNTAX - UPDATE NOT A FUNCTION, use doc id as id instead??
+    firebase.firestore
+      .collection("ToDoList")
+      .where("id", "==", updateItem.id)
+      .update(updateItem);
   }
 
   if (!createFormVisible && selectedTask == null) {
