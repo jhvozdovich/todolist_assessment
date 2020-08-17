@@ -22,7 +22,7 @@ function ToDoControl({ firebase }) {
       description: description,
       id: id,
     };
-    toDoList.push(newItem);
+    firebase.firestore.collection("ToDoList").add(newItem);
     toggleCreateForm(!createFormVisible);
   }
 
