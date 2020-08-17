@@ -1,38 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ListToDo from "./ListToDo";
 import CreateToDo from "./CreateToDo";
 import Button from "@material-ui/core/Button";
 
-const todoList = [
-  {
-    id: "first",
-    title: "Walk dog",
-    description: "Miki wants to walk.",
-  },
-  {
-    id: "second",
-    title: "Grab groceries",
-    description: "Out of milk.",
-  },
-  {
-    id: "third",
-    title: "Feed cat",
-    description: "Zora gets hungry at 7 and 5.",
-  },
-];
-
-function ToDoControl() {
+function ToDoControl({ firebase }) {
   const [createFormVisible, toggleCreateForm] = useState(false);
+  const [toDoList, setToDoList] = useState([]);
+
+  useEffect(() => {
+    const tododb = firebase.firestore.collection("ToDoList");
+    tododb.get().then((query) => {
+      const tasks = query.docs.map((doc) => doc.data());
+      setToDoList(tasks);
+    });
+  });
 
   function addToDo(title, description) {
-    // id logic
-    const id = todoList.length;
+    const id = toDoList.length;
     const newItem = {
       title: title,
       description: description,
       id: id,
     };
-    todoList.push(newItem);
+    toDoList.push(newItem);
     toggleCreateForm(!createFormVisible);
   }
 
@@ -49,7 +39,7 @@ function ToDoControl() {
         >
           Add Item
         </Button>
-        <ListToDo todoList={todoList} />
+        <ListToDo todoList={toDoList} />
       </div>
     );
   } else if (createFormVisible) {

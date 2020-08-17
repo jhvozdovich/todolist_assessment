@@ -1,12 +1,14 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import ToDoControl from "./components/ToDo/ToDoControl";
+import Firebase from "./firebase";
+
+const firebase = new Firebase();
 
 function App() {
   return (
     <div className="App">
-      <ToDoControl />
+      <ToDoControl firebase={firebase} />
     </div>
   );
 }
