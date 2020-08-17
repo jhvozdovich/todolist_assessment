@@ -2,10 +2,10 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import "./ToDoList.css";
 
-function ListToDo({ todoList }) {
+function ListToDo({ todoList, onChangeSelectedTask }) {
   let ToDoList = todoList.map((item) => {
     return (
-      <li>
+      <li onClick={onChangeSelectedTask}>
         {item.title} - {item.description}
       </li>
     );
